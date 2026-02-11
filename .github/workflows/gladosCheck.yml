@@ -38,11 +38,16 @@ jobs:
     # 执行 签到脚本
     - name: running checkin
       run: |
-        python checkin.py
+        python checkin.py & 
+        python enshan_checkin.py & 
+
+        
       env:
         # env获取
         SENDKEY: ${{ secrets.SENDKEY }}
         COOKIES: ${{ secrets.COOKIES }}
+        ENSHAN_COOKIES: ${{ secrets.ENSHAN_COOKIES }}
+
 
     - name: keep alive
       uses: liskin/gh-workflow-keepalive@v1 # using the workflow with default settings
