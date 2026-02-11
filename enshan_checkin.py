@@ -10,18 +10,18 @@ from pypushdeer import PushDeer
 if __name__ == '__main__':
     # pushdeer key 申请地址 https://www.pushdeer.com/product.html
     sckey = os.environ.get("SENDKEY", "")
-
     # 推送内容
     title = ""
     success, fail, repeats = 0, 0, 0        # 成功账号数量 失败账号数量 重复签到账号数量
     context = ""
+
 
     # glados账号cookie 直接使用数组 如果使用环境变量需要字符串分割一下
     cookies = os.environ.get("ENSHAN_COOKIES", []).split("&")
     if cookies[0] != "":
 
         check_in_url = "https://www.right.com.cn/forum/plugin.php?id=erling_qd:action&action=sign"        # 签到地址
-        status_url = "https://glados.cloud/api/user/status"          # 查看账户状态
+        # status_url = "https://glados.cloud/api/user/status"          # 查看账户状态
 
         referer = 'https://www.right.com.cn/forum/erling_qd-sign_in.html'
         origin = "https://www.right.com.cn"
@@ -32,7 +32,7 @@ if __name__ == '__main__':
         
         for cookie in cookies:
             checkin = requests.post(check_in_url, headers={'cookie': cookie, 'referer': referer, 'origin': origin,
-                                    'user-agent': useragent, 'content-type': 'application/json;charset=UTF-8'}, data=json.dumps(payload))
+                                    'user-agent': useragent, 'content-type': 'application/x-www-form-urlencoded'}, data=payload)
 
             # state = requests.get(status_url, headers={
             #                     'cookie': cookie, 'referer': referer, 'origin': origin, 'user-agent': useragent})
@@ -56,13 +56,14 @@ if __name__ == '__main__':
                 # # 获取账号email
                 # email = result['data']['email']
                 
-                print(check_result)
+                print("签到结果:",check_result)
                 if "签到成功" in check_result:
                     success += 1
-                    message_status = "签到成功，连续签到时间 + " + str(continuous_days)
+                    message_status = "签到成功，连续签到时间 +" + str(continuous_days)
                     context+=message_status
                     title = f'恩山论坛,签到成功'
                 else:
+                    print("签到失败原因:",checkin)
                     fail += 1
                     message_status = "签到失败，请检查..."
                     context+=message_status
@@ -80,9 +81,11 @@ if __name__ == '__main__':
                 # else:
                 #     message_days = "error"
             else:
+                print("签到失败原因:",checkin)
                 email = ""
                 message_status = "签到失败, 请检查..."
                 message_days = "-1"
+                context+=message_status
 
             # context += "账号: " + email + ", P: " + str(points) +", 剩余: " + message_days + " | "
 
