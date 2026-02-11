@@ -60,6 +60,8 @@ if __name__ == '__main__':
                 if "签到成功" in check_result:
                     success += 1
                     message_status = "签到成功，连续签到时间 + " + str(continuous_days)
+                    title = f'恩山论坛, 成功,连续签到{continuous_days}天'
+
                 # elif "Checkin Repeats!" in check_result:
                 #     repeats += 1
                 #     message_status = "重复签到，明天再来"
@@ -79,7 +81,6 @@ if __name__ == '__main__':
             # context += "账号: " + email + ", P: " + str(points) +", 剩余: " + message_days + " | "
 
         # 推送内容 
-        title = f'恩山论坛, 成功,连续签到{continuous_days}天'
         # print("Send Content:" + "\n", context)
         
     else:
