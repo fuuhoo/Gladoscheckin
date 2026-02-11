@@ -68,7 +68,7 @@ if __name__ == '__main__':
                     context+=message_status
                     title = f'恩山论坛,签到失败'
             else:
-                print("签到失败原因2:",checkin.json())
+                print("签到失败原因2:",text)
                 email = ""
                 message_status = "签到失败, 请检查..."
                 message_days = "-1"
