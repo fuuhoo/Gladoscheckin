@@ -60,7 +60,13 @@ if __name__ == '__main__':
                 if "签到成功" in check_result:
                     success += 1
                     message_status = "签到成功，连续签到时间 + " + str(continuous_days)
-                    title = f'恩山论坛, 成功,连续签到{continuous_days}天'
+                    context+=message_status
+                    title = f'恩山论坛,签到成功'
+                else:
+                    fail += 1
+                    message_status = "签到失败，请检查..."
+                    context+=message_status
+                    title = f'恩山论坛,签到失败'
 
                 # elif "Checkin Repeats!" in check_result:
                 #     repeats += 1
@@ -85,11 +91,12 @@ if __name__ == '__main__':
         
     else:
         # 推送内容 
-        title = f'# 恩山论坛，未找到 cookies!'
+        title = f'# 恩山论坛，未找到enshan cookies!'
 
     print("sckey:", sckey)
-    print("cookies:", cookies)
-    
+    print("enshan_cookies:", cookies)
+    print("Send Content:" + "\n", context)
+ 
     # 推送消息
     # 未设置 sckey 则不进行推送
     if not sckey:
