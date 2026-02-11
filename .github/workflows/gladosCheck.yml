@@ -39,7 +39,7 @@ jobs:
     - name: running checkin
       run: |
         python checkin.py 
-        python enshan_checkin.py 
+
 
         
       env:
