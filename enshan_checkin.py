@@ -34,8 +34,7 @@ if __name__ == '__main__':
             checkin = requests.post(check_in_url, headers={'cookie': cookie, 'referer': referer, 'origin': origin,
                                     'user-agent': useragent, 'content-type': 'application/x-www-form-urlencoded'}, data=payload)
 
-            # state = requests.get(status_url, headers={
-            #                     'cookie': cookie, 'referer': referer, 'origin': origin, 'user-agent': useragent})
+
 
             message_status = ""
             points = 0
@@ -68,20 +67,8 @@ if __name__ == '__main__':
                     message_status = "签到失败，请检查..."
                     context+=message_status
                     title = f'恩山论坛,签到失败'
-
-                # elif "Checkin Repeats!" in check_result:
-                #     repeats += 1
-                #     message_status = "重复签到，明天再来"
-                # else:
-                #     fail += 1
-                #     message_status = "签到失败，请检查..."
-
-                # if leftdays is not None:
-                #     message_days = f"{leftdays} 天"
-                # else:
-                #     message_days = "error"
             else:
-                print("签到失败原因2:",checkin.json)
+                print("签到失败原因2:",checkin.json())
                 email = ""
                 message_status = "签到失败, 请检查..."
                 message_days = "-1"
@@ -96,9 +83,9 @@ if __name__ == '__main__':
         # 推送内容 
         title = f'# 恩山论坛，未找到enshan cookies!'
 
-    print("sckey:", sckey)
+    print("enshan_sckey:", sckey)
     print("enshan_cookies:", cookies)
-    print("Send Content:" + "\n", context)
+    print("enshan_Send Content:", context)
  
     # 推送消息
     # 未设置 sckey 则不进行推送
