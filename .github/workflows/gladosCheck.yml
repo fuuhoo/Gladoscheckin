@@ -38,8 +38,8 @@ jobs:
     # 执行 签到脚本
     - name: running checkin
       run: |
-        python checkin.py & 
-        python enshan_checkin.py & 
+        python checkin.py 
+        python enshan_checkin.py 
 
         
       env:
